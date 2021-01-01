@@ -1,0 +1,20 @@
+## Interface: 90001
+## Title: Furyswipes_5mmb
+## Author: Furyswipes of Youtube with Papaancake for GSE macro load
+## Version: 0.1
+## Notes: Multiboxing goodness
+## OptionalDeps: GSE, AceComm-3.0, CallbackHandler-1.0
+
+
+embeds.xml
+Furyswipes_5mmb.lua
+Macros\Druid.lua
+Macros\Hunter.lua
+Macros\Mage.lua
+Macros\Paladin.lua
+Macros\Priest.lua
+Macros\Rogue.lua
+Macros\Shaman.lua
+Macros\Warlock.lua
+Macros\Warrior.lua
+loaded.lua
