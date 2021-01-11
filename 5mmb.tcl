@@ -1,4 +1,4 @@
-set version 011021_SL_CLASSIC
+set version 011121_SL_CLASSIC
 lappend auto_path twapi
 lappend auto_path aabacus
 package require twapi
@@ -1088,7 +1088,7 @@ proc nextwin { rotation_type } {
 	#melee: rotates through melee/tank only
 	#ranged: rotates through caster/hunter only
 	global allraids raidhash wowexe healerskip curraid rotation winroles
-	array set roles { dps { melee tank caster healer casterhealer meleehealer hunter} heal { healer casterhealer meleehealer } melee { tank melee meleehealer } ranged { caster casterhealer hunter }}
+	array set roles { dps { melee tank healer tankhealer caster casterhealer meleehealer hunter} heal { healer tankhealer casterhealer meleehealer } melee { tank tankhealer melee meleehealer } ranged { caster casterhealer hunter }}
 	set wow_pids [get_wow_pids]
 	set existing_wins ""
 	foreach mypid $wow_pids {
