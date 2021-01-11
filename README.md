@@ -29,16 +29,16 @@ Now, you are only going to smash if you are currently a certain subset of specs.
 Theres some other stuff to know.
 
 Key customization instructions:  
-Almost everything is customizable by putting keywords into your toonlist.txt!  
+Almost everything is customizable by putting keywords __into your toonlist.txt__!  
 Put the keyword by itself on a line unless otherwise noted.  
 A "list" is a list of values like keys between quotes, example: "2 3 5 !ALT"  
 Seperate multiple lists with a space, example: "2 3 5 !ALT" "1 SPACE"  
   
-noswapontilde   (don't swap which window is big when you press the key to the left of 1)   
-noswaponmousepressed   (stop swapping windows if you have a mouse button down)  
-swapkeydownfull \<one or more lists of key combos>  (swap when you press any one of these keys down, round-robin between the full set of windows)  
-swapkeydownheal \<one or more lists of key combos>  (swap when you press any one of these keys down, round-robin only between roles with healer in the name)  
-swapkeydowndps \<one or more lists of key combos> (swap when you press any one of these keys down, round-robin between the full set of windows, skipping role "healer" 2/3 times)  
+**noswapontilde**   _(don't swap which window is big when you press the key to the left of 1)_   
+**noswaponmousepressed**   _(stop swapping windows if you have a mouse button down)_  
+**swapkeydownfull** \<one or more lists of key combos>  _(swap when you press any one of these keys down, round-robin between the full set of windows)_  
+**swapkeydownheal** \<one or more lists of key combos>  _(swap when you press any one of these keys down, round-robin only between roles with healer in the name)_  
+**swapkeydowndps** \<one or more lists of key combos> _(swap when you press any one of these keys down, round-robin between the full set of windows, skipping role "healer" 2/3 times)_  
 swapkeyupfull (same as previous, but key up)  
 swapkeyupheal (ditto)  
 swapkeyupdps  (ditto)  
