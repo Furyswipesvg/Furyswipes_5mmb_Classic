@@ -1,6 +1,6 @@
-FSMB_version="011121_SL_CLASSIC"
-FSMB_game="classic" 
-FSMB_RAID = "MULTIBOX_myraid1" 
+﻿FSMB_version="011621_SL_CLASSIC"
+FSMB_game="shadow"
+FSMB_RAID = "MULTIBOX_myraid1"
 if FSMB_game=="tbc" then 
 	function print(msg)
 		DEFAULT_CHAT_FRAME:AddMessage(msg);
@@ -175,6 +175,7 @@ if FSMB_game=="shadow" then
 	magePoly = GetSpellInfo(118)
 	druidHibernate = GetSpellInfo(2637)
 	warlockBanish = GetSpellInfo(710)
+	repentance = GetSpellInfo(20066)
 	hammerJustice = GetSpellInfo(853)
 	priestSilence = GetSpellInfo(15487)
 	mageCounter = GetSpellInfo(2139)
@@ -394,17 +395,17 @@ if FSMB_game=="tbc" then
 	victoryRush = GetSpellInfo(34428)
 end
 --
-FSMB_toonlist={[1]="Shermone",[2]="Shermtwo",[3]="Shermthree"}
-FSMB_invitelist={[1]="Shermone",[2]="Shermtwo",[3]="Shermthree"}
-FSMB_tank="Shermone"
+FSMB_toonlist={[1]="Me",[2]="Im",[3]="Earthshock",[4]="Palia",[5]="Snöbgoblin"}
+FSMB_invitelist={[1]="Me-nathrezim",[2]="Im-nathrezim",[3]="Earthshock-cenarius",[4]="Palia-nathrezim",[5]="Snöbgoblin-illidan"}
+FSMB_tank="Me"
 FSMB_clothto="Vaj"
 FSMB_tradeopen=nil
 FSMB_nomacros=nil
-FSMB_healerlist={"Shermone","Shermtwo","Shermthree"}
+FSMB_healerlist={"Im","Earthshock"}
 FSMB_meleelist={}
 FSMB_maxheal={Druid=11,Priest=11,Shaman=11,Paladin=11}
 FSMB_myrez={["PALADIN"]=(redemption),["SHAMAN"]=(ancestralSpirit),["DRUID"]=(revive),["MONK"]=(resuscitate),["PRIEST"]=(resurrection),["DEATHKNIGHT"]=(raiseAlly)}
-FSMB_mypoly={["HUNTER"]=(freezingTrap),["SHAMAN"]=(hex),["ROGUE"]=(sap),["DEATHKNIGHT"]=("NONE"),["DEMONHUNTER"]=(imprison),["MONK"]=(paralysis),["PRIEST"]=(shackleUndead),["MAGE"]=(magePoly),["DRUID"]=(druidHibernate),["WARLOCK"]=(warlockBanish)}
+FSMB_mypoly={["HUNTER"]=(freezingTrap),["SHAMAN"]=(hex),["ROGUE"]=(sap),["DEATHKNIGHT"]=("NONE"),["DEMONHUNTER"]=(imprison),["MONK"]=(paralysis),["PRIEST"]=(shackleUndead),["MAGE"]=(magePoly),["DRUID"]=(druidHibernate),["WARLOCK"]=(warlockBanish),["PALADIN"]=(repentance)}
 FSMB_selfheal={["DEATHKNIGHT"]=(ib),["DEMONHUNTER"]=(blur),["MONK"]=(spearHand),["PALADIN"]=(divineShield),["PRIEST"]=(priestHeal),["MAGE"]=(iceBlock),["DRUID"]=(druidHeal),["SHAMAN"]=(shamanHeal),["HUNTER"]=(exil),["WARLOCK"]=(unendingRes),["WARRIOR"]=(victoryRush),["ROGUE"]=(vanish),}
 FSMB_myint={["DEMONHUNTER"]=(disrupt),["MONK"]=(spearHand),["PALADIN"]=(hammerJustice),["PRIEST"]=(priestSilence),["MAGE"]=(mageCounter),["DRUID"]=(druidBash),["SHAMAN"]=(windShear),["HUNTER"]=(counterShot),["WARLOCK"]="",["WARRIOR"]=(warPummel),["ROGUE"]=(rogueKick),}
 if FSMB_game=="shadow" then FSMB_myint["PALADIN"]=rebuke end
