@@ -1,5 +1,5 @@
-﻿FSMB_version="011621_SL_CLASSIC"
-FSMB_game="shadow"
+FSMB_version="021421_SL_CLASSIC"
+FSMB_game="classic"
 FSMB_RAID = "MULTIBOX_myraid1"
 if FSMB_game=="tbc" then 
 	function print(msg)
@@ -175,7 +175,6 @@ if FSMB_game=="shadow" then
 	magePoly = GetSpellInfo(118)
 	druidHibernate = GetSpellInfo(2637)
 	warlockBanish = GetSpellInfo(710)
-	repentance = GetSpellInfo(20066)
 	hammerJustice = GetSpellInfo(853)
 	priestSilence = GetSpellInfo(15487)
 	mageCounter = GetSpellInfo(2139)
@@ -395,17 +394,17 @@ if FSMB_game=="tbc" then
 	victoryRush = GetSpellInfo(34428)
 end
 --
-FSMB_toonlist={[1]="Me",[2]="Im",[3]="Earthshock",[4]="Palia",[5]="Snöbgoblin"}
-FSMB_invitelist={[1]="Me-nathrezim",[2]="Im-nathrezim",[3]="Earthshock-cenarius",[4]="Palia-nathrezim",[5]="Snöbgoblin-illidan"}
-FSMB_tank="Me"
+FSMB_toonlist={[1]="Shivved",[2]="Staabbed",[3]="Cutted",[4]="Slitted",[5]="Slliced"}
+FSMB_invitelist={[1]="Shivved",[2]="Staabbed",[3]="Cutted",[4]="Slitted",[5]="Slliced"}
+FSMB_tank="Shivved"
 FSMB_clothto="Vaj"
 FSMB_tradeopen=nil
 FSMB_nomacros=nil
-FSMB_healerlist={"Im","Earthshock"}
-FSMB_meleelist={}
+FSMB_healerlist={}
+FSMB_meleelist={"Staabbed","Cutted","Slitted","Slliced"}
 FSMB_maxheal={Druid=11,Priest=11,Shaman=11,Paladin=11}
 FSMB_myrez={["PALADIN"]=(redemption),["SHAMAN"]=(ancestralSpirit),["DRUID"]=(revive),["MONK"]=(resuscitate),["PRIEST"]=(resurrection),["DEATHKNIGHT"]=(raiseAlly)}
-FSMB_mypoly={["HUNTER"]=(freezingTrap),["SHAMAN"]=(hex),["ROGUE"]=(sap),["DEATHKNIGHT"]=("NONE"),["DEMONHUNTER"]=(imprison),["MONK"]=(paralysis),["PRIEST"]=(shackleUndead),["MAGE"]=(magePoly),["DRUID"]=(druidHibernate),["WARLOCK"]=(warlockBanish),["PALADIN"]=(repentance)}
+FSMB_mypoly={["HUNTER"]=(freezingTrap),["SHAMAN"]=(hex),["ROGUE"]=(sap),["DEATHKNIGHT"]=("NONE"),["DEMONHUNTER"]=(imprison),["MONK"]=(paralysis),["PRIEST"]=(shackleUndead),["MAGE"]=(magePoly),["DRUID"]=(druidHibernate),["WARLOCK"]=(warlockBanish)}
 FSMB_selfheal={["DEATHKNIGHT"]=(ib),["DEMONHUNTER"]=(blur),["MONK"]=(spearHand),["PALADIN"]=(divineShield),["PRIEST"]=(priestHeal),["MAGE"]=(iceBlock),["DRUID"]=(druidHeal),["SHAMAN"]=(shamanHeal),["HUNTER"]=(exil),["WARLOCK"]=(unendingRes),["WARRIOR"]=(victoryRush),["ROGUE"]=(vanish),}
 FSMB_myint={["DEMONHUNTER"]=(disrupt),["MONK"]=(spearHand),["PALADIN"]=(hammerJustice),["PRIEST"]=(priestSilence),["MAGE"]=(mageCounter),["DRUID"]=(druidBash),["SHAMAN"]=(windShear),["HUNTER"]=(counterShot),["WARLOCK"]="",["WARRIOR"]=(warPummel),["ROGUE"]=(rogueKick),}
 if FSMB_game=="shadow" then FSMB_myint["PALADIN"]=rebuke end
@@ -1426,7 +1425,7 @@ function init()
 	if FSMB_game~="tbc" then 
 		SetCVar("Sound_EnablePetSounds", 0)
 		SetCVar("nameplateShowEnemies", true)
-		SetCVar("nameplateShowFriends", true)
+		SetCVar("nameplateShowFriends", false)
 		SetCVar("autoLootDefault", true)
 		SetCVar("showTutorials", false)
 		SetCVar("Sound_EnablePetSounds", false)
@@ -1718,18 +1717,16 @@ end
 --  [270] = "Mistweaver",
 --  [577] = "Havoc",
 --  [581] = "Vengeance",
-SLASH_FIND1="/find"
-SlashCmdList["FIND"]=function(item)
-	if item=="" then Print("Usage /find <classname or all or nothing> <wearing> item slot or string") return end
-	if FSMB_game=="shadow" or FSMB_game=="classic" then 
-		AceComm.SendCommMessage(FSMB,"FSMB_FIND", item ,"RAID")
-	end
-end
+--SLASH_FIND1="/find"
+--SlashCmdList["FIND"]=function(item)
+	--if item=="" then Print("Usage /find <classname or all or nothing> <wearing> item slot or string") return end
+	--if FSMB_game=="shadow" or FSMB_game=="classic" then 
+		--AceComm.SendCommMessage(FSMB,"FSMB_FIND", item ,"RAID")
+	--end
+--end
 FSMB = CreateFrame("frame","FSMB",UIParent)
 function FSMB:OnCommReceived(prefix,msg)
-	if prefix=="FSMB_FIND" then
-		FSMB_Find(msg)
-	elseif prefix=="FSMB_FOCUS" then
+	if prefix=="FSMB_FOCUS" then
 		print(FSMB_RAID.." Focusing " .. msg)
 		FSMB_raidleader=msg
 		follow()
@@ -1754,7 +1751,6 @@ FSMB:SetScript("OnUpdate",function()
 end)
 -- register the events we want to use (this is why we made the frame)
 if FSMB_game=="shadow" or FSMB_game=="classic" then 
-	AceComm.RegisterComm(FSMB,"FSMB_FIND")
 	AceComm.RegisterComm(FSMB,"FSMB_FOCUS")
 	AceComm.RegisterComm(FSMB,"FSMB_MELEEFOLLOW")
 end
@@ -1802,11 +1798,11 @@ FSMB:SetScript("OnEvent", function(self,event, arg1, arg2, ...) -- event handler
 		--Print("Addon message recieved from"..arg2)
 		--Print("Addon message recieved from"..arg3)
 		--Print("Addon message recieved from"..arg4)
-		if arg1=="FSMB_FIND" then
-			local item = arg2
-			print("Got find request for "..item)
-			FSMB_Find(item)
-		end
+		--if arg1=="FSMB_FIND" then
+			--local item = arg2
+			--print("Got find request for "..item)
+			--FSMB_Find(item)
+		--end
 	elseif event == "UI_ERROR_MESSAGE" then
 		if arg1 == 50 then
 			if arg2 == SPELL_FAILED_NOT_STANDING then
@@ -1902,7 +1898,7 @@ function TableReverse(table)
 		end
 	return t
 end
-function FSMB_Find(item)
+function dontuseFSMB_Find(item)
 	FSMB_slotmap={ [0]="ammo",[1]="head",[2]="neck",[3]="shoulder",[4]="shirt",[5]="chest",[6]="waist",[7]="legs",[8]="feet",[9]="wrist",[10]="hands",[11]="finger 1",[12]="finger 2",[13]="trinket 1",[14]="trinket 2",[15]="back",[16]="main hand",[17]="off hand",[18]="ranged",[19]="tabard"}
 	FSMB_slotmap_i=TableReverse(FSMB_slotmap)
 	local Rarity={["poor"]=0,["common"]=1,["uncommon"]=2,["rare"]=3,["epic"]=4,["legendary"]=5}
