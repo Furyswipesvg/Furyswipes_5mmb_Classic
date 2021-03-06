@@ -1,4 +1,4 @@
-set version 030221_SL_CLASSIC
+set version 030621b_SL_CLASSIC
 lappend auto_path twapi
 lappend auto_path aabacus
 package require twapi
@@ -123,8 +123,10 @@ if { $tL != "" } {
 }
 set numtoons 0
 set allraids {}
-#User can't use focus follows mouse for this to work
-twapi::set_system_parameters_info SPI_SETACTIVEWINDOWTRACKING false
+if { ![toonlistKey norr] } {
+	#User can't use focus follows mouse for this to work
+	twapi::set_system_parameters_info SPI_SETACTIVEWINDOWTRACKING false
+}
 while { [gets $tL line] >= 0 } {
 	set line [regsub "\n" $line "" ]
 	if { $line == "" } { continue }
@@ -406,7 +408,7 @@ if {[toonlistKey windowplacement]} {
 }
 
 
-if { ! $nosmoverwrite } {
+if { ![toonlistKey norr] && ! $nosmoverwrite } {
 	set sM [open $SME r]
 	fconfigure $sM -encoding utf-8
 	set sMN [open tmp w+]
@@ -668,7 +670,7 @@ proc pop { raid } {
 	set i 0
 	foreach win $new_windows {
 		set newwin [lindex $win 0]
-		puts "Setting up $win"
+		#puts "Setting up $win"
 		set order [lindex $win 1]
 		set toon [lindex [dict get $allraids ${curraid}1] $order]
 		set rename_to [lindex $toon 0]
@@ -680,23 +682,17 @@ proc pop { raid } {
 		set ypos [lindex $raidhash($wincount) $order 3]
 		set mywin [twapi::find_windows -single -messageonlywindow false -pids $pids($newwin)  -toplevel true -visible true -text $wow_name]
 		if { $mywin != "" } {
-			twapi::set_foreground_window $mywin
 			twapi::resize_window $mywin $x $y
 			twapi::move_window $mywin $xpos $ypos
+			twapi::set_foreground_window $mywin
 			twapi::set_window_text $mywin "$rename_to"
+			fswait $extrawait2
 			twapi::set_foreground_window $mywin
 			twapi::enable_window_input $mywin
-			puts "Extrawait2"
-			fswait $extrawait2
-			if {$i == 0 } {
-				fswait $extrawait2
-				fswait $extrawait2
-				fswait $extrawait2
+			if { [twapi::get_window_text [twapi::get_foreground_window]] == $rename_to } {
+				twapi::send_input_text "$pw"
+				twapi::send_keys ~
 			}
-			puts "done!"
-			twapi::send_input_text "$pw"
-			twapi::enable_window_input $mywin
-			twapi::send_keys ~
 			if { [toonlistKey noframes] } { BorderLess $mywin 1 }
 			incr i
 		}
@@ -718,11 +714,11 @@ proc BorderLess {w resize} {
     # ~(WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE | WS_EX_STATICEDGE)
     #    0x00000001L          0x00000100L         0x00000200L       0x00020000L
     lassign [twapi::get_window_client_area_size $w] w1 h1
-    puts "Client area : $w1 x $h1"
+    #puts "Client area : $w1 x $h1"
     lassign [twapi::get_window_coordinates $w] x1 y1 x2 y2
     set w2 [expr {$x2-$x1}]
     set h2 [expr {$y2-$y1}]
-    puts "Size $x1 $y1 $x2 $y2 -> $w2 x $h2"
+    #puts "Size $x1 $y1 $x2 $y2 -> $w2 x $h2"
     twapi::set_window_style $w [expr {$style & ~ 0xc40000}] [expr {$exstyle & ~ 0x20301}]
     if {$resize} {
         twapi::resize_window $w $w1 $h1
@@ -1242,7 +1238,7 @@ while { ![toonlistKey usewob] && ($game == "shadow" || $game == "classic") } {
 	}
 
 	5mmb_update_keystate ; # Do not remove or move
-
+  if { ![toonlistKey norr] } {
 	# You can replace the dps key swap list completely with override.
 	if { ![toonlistKey swapkeydowndps] } {
 		5mmb_monitor -keydown "2 3 5 !ALT" "switchwin dps"
@@ -1319,6 +1315,14 @@ while { ![toonlistKey usewob] && ($game == "shadow" || $game == "classic") } {
 		5mmb_monitor -keyup [join $switchtoleader] "arrangewin $currlead ; reset_rotations"
 		5mmb_monitor "ALT 2" "arrangewin $currlead"
 	}
+	if { ![toonlistKey dontresetrotations] && [lock_key_is_on] && [expr $idletimer + $returndelay] < [clock milliseconds] && [wow_is_focused] } {
+		resettimer
+		reset_rotations
+	}
+	if { [toonlistKey displayrotations] } {
+		vmonitor
+	}
+  }
 
 	5mmb_monitor "CONTROL h" {help}
 	5mmb_monitor "CONTROL ALT o" {closeall}
@@ -1328,12 +1332,5 @@ while { ![toonlistKey usewob] && ($game == "shadow" || $game == "classic") } {
 		set raid [string index $raid 0]
 		5mmb_monitor "CONTROL ALT $raid" "pop $raid"
 		5mmb_monitor "CONTROL SHIFT $raid" "arrangewin 1"
-	}
-	if { ![toonlistKey dontresetrotations] && [lock_key_is_on] && [expr $idletimer + $returndelay] < [clock milliseconds] && [wow_is_focused] } {
-		resettimer
-		reset_rotations
-	}
-	if { [toonlistKey displayrotations] } {
-		vmonitor
 	}
 }
