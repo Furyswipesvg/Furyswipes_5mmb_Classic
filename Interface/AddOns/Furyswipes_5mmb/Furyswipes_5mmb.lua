@@ -1,17 +1,17 @@
-FSMB_version="021421_SL_CLASSIC"
-FSMB_game="classic"
+﻿FSMB_version="040221_SL_CLASSIC"
+FSMB_game="shadow"
 FSMB_RAID = "MULTIBOX_myraid1"
 if FSMB_game=="tbc" then 
 	function print(msg)
 		DEFAULT_CHAT_FRAME:AddMessage(msg);
 		--DEFAULT_CHAT_FRAME:AddMessage(msg, SM_VARS.printColor.r, SM_VARS.printColor.g, SM_VARS.printColor.b);
 	end
-	SLASH_RELOAD1="/reload"
-	SlashCmdList["RELOAD"]=function()
+	SLASH_RELOAD1="/reload" 
+	SlashCmdList["RELOAD"]=function() 
 	ReloadUI()
 	end
 end
-print(FSMB_game.." mode detected!")
+print(FSMB_game.." mode detected!") 
 FSMB_turbokeys={"2","3","4","5","6"}
 if FSMB_game=="shadow" or FSMB_game=="classic" then 
 	AceComm=LibStub("AceComm-3.0")
@@ -36,6 +36,9 @@ if FSMB_game=="shadow" or FSMB_game=="classic" then
 	--SetOverrideBindingClick(UIParent, true,"6","ActionButton6")
 end
 print('Hello from 5mmb!')
+FSMB_clicktotal=1
+FSMB_clicktimes={}
+FSMB_hivemind=true
 FSMB_dontsetcamera=false
 FSMB_dontsetleadercamera=false
 FSMB_spellTable={}
@@ -175,6 +178,7 @@ if FSMB_game=="shadow" then
 	magePoly = GetSpellInfo(118)
 	druidHibernate = GetSpellInfo(2637)
 	warlockBanish = GetSpellInfo(710)
+	repentance = GetSpellInfo(20066)
 	hammerJustice = GetSpellInfo(853)
 	priestSilence = GetSpellInfo(15487)
 	mageCounter = GetSpellInfo(2139)
@@ -194,6 +198,7 @@ if FSMB_game=="shadow" then
 	imprison = GetSpellInfo(217832)
 	blur = GetSpellInfo(198589)
 	disrupt = GetSpellInfo(183752)
+	mindfreeze = GetSpellInfo(47528)
 	consumeMagic = GetSpellInfo(278326)
 	detox = GetSpellInfo(115450)
 end
@@ -394,19 +399,19 @@ if FSMB_game=="tbc" then
 	victoryRush = GetSpellInfo(34428)
 end
 --
-FSMB_toonlist={[1]="Shivved",[2]="Staabbed",[3]="Cutted",[4]="Slitted",[5]="Slliced"}
-FSMB_invitelist={[1]="Shivved",[2]="Staabbed",[3]="Cutted",[4]="Slitted",[5]="Slliced"}
-FSMB_tank="Shivved"
+FSMB_toonlist={[1]="Me",[2]="Im",[3]="Earthshock",[4]="Palia",[5]="Snöbgoblin"}
+FSMB_invitelist={[1]="Me-nathrezim",[2]="Im-nathrezim",[3]="Earthshock-cenarius",[4]="Palia-nathrezim",[5]="Snöbgoblin-illidan"}
+FSMB_tank="Me"
 FSMB_clothto="Vaj"
 FSMB_tradeopen=nil
 FSMB_nomacros=nil
-FSMB_healerlist={}
-FSMB_meleelist={"Staabbed","Cutted","Slitted","Slliced"}
+FSMB_healerlist={"Im","Earthshock"}
+FSMB_meleelist={}
 FSMB_maxheal={Druid=11,Priest=11,Shaman=11,Paladin=11}
 FSMB_myrez={["PALADIN"]=(redemption),["SHAMAN"]=(ancestralSpirit),["DRUID"]=(revive),["MONK"]=(resuscitate),["PRIEST"]=(resurrection),["DEATHKNIGHT"]=(raiseAlly)}
-FSMB_mypoly={["HUNTER"]=(freezingTrap),["SHAMAN"]=(hex),["ROGUE"]=(sap),["DEATHKNIGHT"]=("NONE"),["DEMONHUNTER"]=(imprison),["MONK"]=(paralysis),["PRIEST"]=(shackleUndead),["MAGE"]=(magePoly),["DRUID"]=(druidHibernate),["WARLOCK"]=(warlockBanish)}
+FSMB_mypoly={["HUNTER"]=(freezingTrap),["SHAMAN"]=(hex),["ROGUE"]=(sap),["DEATHKNIGHT"]=("NONE"),["DEMONHUNTER"]=(imprison),["MONK"]=(paralysis),["PRIEST"]=(shackleUndead),["MAGE"]=(magePoly),["DRUID"]=(druidHibernate),["WARLOCK"]=(warlockBanish),["PALADIN"]=(repentance)}
 FSMB_selfheal={["DEATHKNIGHT"]=(ib),["DEMONHUNTER"]=(blur),["MONK"]=(spearHand),["PALADIN"]=(divineShield),["PRIEST"]=(priestHeal),["MAGE"]=(iceBlock),["DRUID"]=(druidHeal),["SHAMAN"]=(shamanHeal),["HUNTER"]=(exil),["WARLOCK"]=(unendingRes),["WARRIOR"]=(victoryRush),["ROGUE"]=(vanish),}
-FSMB_myint={["DEMONHUNTER"]=(disrupt),["MONK"]=(spearHand),["PALADIN"]=(hammerJustice),["PRIEST"]=(priestSilence),["MAGE"]=(mageCounter),["DRUID"]=(druidBash),["SHAMAN"]=(windShear),["HUNTER"]=(counterShot),["WARLOCK"]="",["WARRIOR"]=(warPummel),["ROGUE"]=(rogueKick),}
+FSMB_myint={["DEATHKNIGHT"]=(mindfreeze),["DEMONHUNTER"]=(disrupt),["MONK"]=(spearHand),["PALADIN"]=(hammerJustice),["PRIEST"]=(priestSilence),["MAGE"]=(mageCounter),["DRUID"]=(druidBash),["SHAMAN"]=(windShear),["HUNTER"]=(counterShot),["WARLOCK"]="",["WARRIOR"]=(warPummel),["ROGUE"]=(rogueKick),}
 if FSMB_game=="shadow" then FSMB_myint["PALADIN"]=rebuke end
 FSMB_decurse={["MONK"]=(detox),["DEMONHUNTER"]=(consumeMagic),["PALADIN"]=(palaCleanse),["PRIEST"]=(dispelMagic),["MAGE"]=(remLesserCurse),["DRUID"]=(remCurse),["SHAMAN"]=(curePoison),["HUNTER"]="None",["WARLOCK"]="None",["WARRIOR"]="None",["ROGUE"]="None",}
 FSMB_heal_names={["MONK"]=(vivify),["PALADIN"]=(palaHeal),["PRIEST"]=(priestHeal),["DRUID"]=(druidHeal),["SHAMAN"]=(shamanHeal)}
@@ -464,7 +469,7 @@ function farm()
 			elseif myspec==3 then myspec="GUARDIAN"
 			elseif myspec==2 then myspec="FERAL" FSMB_IsMelee=true
 			else myspec="BALANCE" end
-		elseif myClass=="MAGE" then
+		elseif myClass=="MAGE" then 
 			if myspec==3 then myspec="FROST"
 			elseif myspec==2 then myspec="FIRE"
 			else myspec="ARCANE" end
@@ -1069,12 +1074,13 @@ function init()
 		if myname==FSMB_tank and (FSMB_game~="shadow" and FSMB_game~="classic") then			
 			index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/click "..prefix..myspec.."_SETUP",nil)
 		elseif FSMB_game=="shadow" then
+				--index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/run PrintClicksPerSecond()",nil)
 			if myname==FSMB_tank then
-				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@focus,exists][notarget,@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/run melee_follow()",nil)
+				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@focus,exists][notarget,@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/run melee_follow()\n/cast [combat] "..FSMB_myint[myClass].."\n/run mountup()",nil)
 			elseif FindInTable(FSMB_toonlist,myname) then
-				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@focus,exists][@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/run melee_follow()",nil)
+				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/assist [@focus,exists][@"..FSMB_tank..",exists]\n/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/run melee_follow()\n/cast [combat] "..FSMB_myint[myClass].."\n/run mountup()",nil)
 			else
-				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n",nil)
+				index=CreateMacroFS("setup_fs","Spell_magic_polymorphchicken","/click "..prefix..myspec.."_SETUP\n/stopcasting [mod:alt]\n/cast [combat] "..FSMB_myint[myClass].."\n/run mountup()",nil)
 			end
 		elseif FSMB_game=="classic" then
 			if myname==FSMB_tank then
@@ -1322,7 +1328,7 @@ function init()
 	SetBinding("4","ACTIONBUTTON4")
 	SetBinding("5","ACTIONBUTTON5")
 	SetBinding("6","ACTIONBUTTON6")
-	SetBinding("7","ACTIONBUTTON7")
+	SetBinding("7","TOGGLEAUTORUN")
 	SetBinding("8","ACTIONBUTTON8")
 	SetBinding("9","ACTIONBUTTON9")
 	SetBinding("0","ACTIONBUTTON10")
@@ -1390,7 +1396,7 @@ function init()
 	SetBinding("CTRL-2")
 	SetBinding("CTRL-3")
 	SetBinding("CTRL-4")
-	SetBinding("CTRL-5")
+	SetBinding("CTRL-5")  -- sup
 	SetBinding("CTRL-6")
 	SetBinding("CTRL-7")
 	SetBinding("CTRL-8")
@@ -1398,6 +1404,18 @@ function init()
 	SetBinding("CTRL-0")
 	SetBinding("CTRL--")
 	SetBinding("CTRL-=")
+	SetBinding("ALT-1")
+	SetBinding("ALT-2")
+	SetBinding("ALT-3")
+	SetBinding("ALT-4")
+	SetBinding("ALT-5")
+	SetBinding("ALT-6")
+	SetBinding("ALT-7")
+	SetBinding("ALT-8")
+	SetBinding("ALT-9")
+	SetBinding("ALT-0")
+	SetBinding("ALT--")
+	SetBinding("ALT-=")
 	SetBinding("SHIFT-UP")
 	SetBinding("SHIFT-DOWN")
 	SetBinding("SHIFT-MOUSEWHEELUP")
@@ -1414,7 +1432,6 @@ function init()
 		SetCVar("statusText", true)
 		SetCVar("statusTextDisplay", "NUMERIC")
 		SetCVar("useCompactPartyFrames", 1)
-		SetCVar("blockChannelInvites", true)
 		SetCVar("instantQuestText", true)
 		SetCVar("nameplateMotion", true)
 		SetCVar("expandUpgradePanel", 0)
@@ -1453,6 +1470,29 @@ function init()
 	ClearTutorials()
 	ReloadUI()
 end
+function TablePush(table,value,elements)
+	if TableLength(table)==0 then
+		table[1]=value
+		return
+	end
+	for i=elements,1,-1 do
+		if i==1 then table[1]=value return end
+		if i~=elements then 
+			if TableLength(table)>=i-1 then  
+				table[i]=table[i-1]
+			end
+		end
+	end
+	return table
+end
+
+function PrintClicksPerSecond()
+	--Track last 20 clicks
+	TablePush(FSMB_clicktimes,GetTime(),20)
+	local cps=TableLength(FSMB_clicktimes)/(FSMB_clicktimes[1] - FSMB_clicktimes[TableLength(FSMB_clicktimes)])
+	Print("Clicks Per Second = "..cps)
+end
+	
 function PartyUp()
 	local partymac=""
 	FSMB_raidleader=myname
@@ -1726,6 +1766,8 @@ end
 --end
 FSMB = CreateFrame("frame","FSMB",UIParent)
 function FSMB:OnCommReceived(prefix,msg)
+	--if prefix=="FSMB_FIND" then
+		--FSMB_Find(msg)
 	if prefix=="FSMB_FOCUS" then
 		print(FSMB_RAID.." Focusing " .. msg)
 		FSMB_raidleader=msg
@@ -1734,6 +1776,12 @@ function FSMB:OnCommReceived(prefix,msg)
 	elseif prefix=="FSMB_MELEEFOLLOW" then
 		print(FSMB_RAID.." Melee Following!")
 		if FindInTable(FSMB_meleelist,myname) then follow() end
+	elseif prefix=="FSMB_AUTOMOUNT" then
+		print(FSMB_RAID.." Mounting!")
+		automount()
+	elseif prefix=="FSMB_DISMOUNT" then
+		print(FSMB_RAID.." Dismounting.")
+		Dismount()
 	end
 end
 FSMB:SetScript("OnUpdate",function()
@@ -1751,8 +1799,11 @@ FSMB:SetScript("OnUpdate",function()
 end)
 -- register the events we want to use (this is why we made the frame)
 if FSMB_game=="shadow" or FSMB_game=="classic" then 
+	AceComm.RegisterComm(FSMB,"FSMB_FIND")
 	AceComm.RegisterComm(FSMB,"FSMB_FOCUS")
 	AceComm.RegisterComm(FSMB,"FSMB_MELEEFOLLOW")
+	AceComm.RegisterComm(FSMB,"FSMB_AUTOMOUNT")
+	AceComm.RegisterComm(FSMB,"FSMB_DISMOUNT")
 end
 FSMB:RegisterEvent("ADDON_LOADED") -- register event "ADDON_LOADED"
 FSMB:RegisterEvent("CHAT_MSG_ADDON")
@@ -1964,7 +2015,8 @@ function dontuseFSMB_Find(item)
 				items=string.lower(item)
 				match = string.find(links, items)
 				if IsUnboundBOE(bag,slot) then
-					FSMB_msg("Found "..link.." in bag "..bag.." slot "..slot)
+					FSMB_msg("Found boe "..link.." in bag "..bag.." slot "..slot)
+			return
 				end
 			end
 		end end
@@ -2017,7 +2069,11 @@ function dontuseFSMB_Find(item)
 					local bsnum=string.gsub(itemLink,".-\124H([^\124]*)\124h.*", "%1")
 					local itemName, _, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemIcon = GetItemInfo(bsnum)
 					local match=nil
-					links=string.lower(itemName)
+					if itemName then
+						links=string.lower(itemName)
+					else
+						links=string.lower(itemLink)
+					end
 					items=string.lower(item)
 					match = string.find(links, items)
 					if itemEquipLoc then
@@ -2043,7 +2099,7 @@ function dontuseFSMB_Find(item)
 		end
 	end
 end
-function IsUnboundBOE(b,s)
+function hideIsUnboundBOE(b,s)
 	local soulbound=nil
 	local boe=nil
 	--local _,_,itemID = string.find(itemlink, "item:(%d+)")
@@ -2053,9 +2109,11 @@ function IsUnboundBOE(b,s)
 	FSMBtooltip:Show()
 	local index = 1
 	local ltext = getglobal("FSMBtooltipTextLeft"..index):GetText()
+	print("DeBuG "..ltext)
 	while ltext ~= nil do
 		ltext = getglobal("FSMBtooltipTextLeft"..index):GetText()
 		if ltext ~= nil then
+	print("DeBuG2 "..ltext)
 			if string.find(ltext,"Soulbound") or string.find(ltext,textSoulbound) then
 				soulbound=true
 			end
@@ -2065,6 +2123,7 @@ function IsUnboundBOE(b,s)
 		end
 		index=index+1
 	end
+	print("haha "..nil)
 	if not soulbound and boe then return true end
 end
 function FSMB_msg(msg)
@@ -2276,15 +2335,37 @@ function focusme()
 	end
 
 end
+function mountup()
+        if FSMB_game~="shadow" then return end
+	if IsControlKeyDown() then 
+		Dismount()
+		AceComm.SendCommMessage(FSMB,"FSMB_DISMOUNT", UnitName("player"),"RAID")
+	else
+		automount()
+		AceComm.SendCommMessage(FSMB,"FSMB_AUTOMOUNT", UnitName("player"),"RAID")
+	end
+end
 function follow()
 	--This is meant to be in your alt-4 macro, and gets everyone to follow and assist the focus (meant to be your current window toon)
 	if FSMB_game == "shadow" or FSMB_game=="classic" then
+		inInst,instType=IsInInstance()
+		if FSMB_tank==myname and (inInst and instType=="party") then return end
 		if not IsAltKeyDown() and not IsControlKeyDown() and not IsShiftKeyDown() then
 			FollowUnit(unitname(FSMB_raidleader))
 		end
 	elseif not IAmFocus() and FSMB_raidleader and IsAltKeyDown() then
 		FollowUnit(unitname(FSMB_raidleader))
 	end
+end
+function automount()
+	inInst,instType=IsInInstance()
+	if FSMB_game ~= "shadow"  then return end
+	if GetZoneText()=="The Maw" and SecureCmdOptionParse"[nodead,nomod,nocombat,nomounted]" then C_MountJournal.SummonByID(1442) 
+	elseif FSMB_hivemind and myname~="Mootalia" and not (inInst and instType=="party") then
+		if FSMB_raidleader==myname or FSMB_tank==myname then 
+			if SecureCmdOptionParse"[nodead,nomod,nocombat,nomounted]" then C_MountJournal.SummonByID(1025) end
+		end
+	elseif SecureCmdOptionParse"[nodead,nomod,nocombat,outdoors,nomounted]"then C_MountJournal.SummonByID(0)end
 end
 function melee_follow()
         if FSMB_game=="classic" or FSMB_game=="shadow" then 

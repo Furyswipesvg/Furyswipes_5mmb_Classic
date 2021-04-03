@@ -19,6 +19,8 @@ L[" tried to overwrite the version already loaded from "] = "試圖覆蓋已經�
 L[" was imported as a new macro."] = "導入為新的巨集."
 L[" was imported with the following errors."] = "導入時出現以下錯誤."
 L[" was updated to new version."] = "已更新為新版本."
+--[[Translation missing --]]
+L["%sMACRO VALIDATION ERROR|r - PostMacro found with invalid LoopLimit.  PostMacro will not be saved for version %s"] = "%sMACRO VALIDATION ERROR|r - PostMacro found with invalid LoopLimit.  PostMacro will not be saved for version %s"
 L[". This version was not loaded."] = ". 未加載此版本."
 L["/gs |r to get started."] = "/gs |r 已開始."
 L["/gs checkmacrosforerrors|r will loop through your macros and check for corrupt macro versions.  This will then show how to correct these issues."] = "/ gs checkmacrosforerrors |r 將循環訪問你的巨集並檢查是否存在損壞的巨集版本.同時顯示如何糾正這些問題."
@@ -494,6 +496,14 @@ L["There are No Macros Loaded for this class.  Would you like to load the Sample
 L["There is an issue with sequence %s.  It has not been loaded to prevent the mod from failing."] = "序列%s存在錯誤. 它沒有被加載,以防止模組出錯."
 L[ [=[These lines are executed after the lines in the Sequence Box have been repeated Inner Loop Limit number of times.  If an Inner Loop Limit is not set, these are never executed as the sequence will never stop repeating.
 The Sequence will then go on to the PreMacro if it exists then back to the Sequence.]=] ] = "這些行在序列框中的行重複內循環限制次數後執行. 如果未設置內循環限制.則永遠不會執行這些循環限制.因為序列永遠不會停止重複. 然後.如果序列存在.則序列將繼續前進到序列."
+--[[Translation missing --]]
+L[ [=[These lines are executed after the lines in the Sequence Box have been repeated Inner Loop Limit number of times.  If an Inner Loop Limit is not set, this box will be disabled as these are never executed as the sequence will never stop repeating.
+The Sequence will then go on to the PreMacro if it exists then back to the Sequence.]=] ] = [=[These lines are executed after the lines in the Sequence Box have been repeated Inner Loop Limit number of times.  If an Inner Loop Limit is not set, this box will be disabled as these are never executed as the sequence will never stop repeating.
+The Sequence will then go on to the PreMacro if it exists then back to the Sequence.]=]
+--[[Translation missing --]]
+L[ [=[These lines are executed after the lines in the Sequence Box have been repeated Inner Loop Limit number of times.
+The Sequence will then go on to the PreMacro if it exists then back to the Sequence.]=] ] = [=[These lines are executed after the lines in the Sequence Box have been repeated Inner Loop Limit number of times.
+The Sequence will then go on to the PreMacro if it exists then back to the Sequence.]=]
 L[ [=[These lines are executed before the lines in the Sequence Box.  If an Inner Loop Limit is not set, these are executed only once.  
 If an Inner Loop Limit has been set these are executed after the Sequence has been looped through the number of times.  
 The Sequence will then go on to the Post Macro if it exists then back to the PreMacro.]=] ] = "這些行在序列框中的行之前執行. 如果未設置內循環限制.則僅執行一次. 如果設置了內循環限制.則在序列循環次數後執行這些限制. 然後.序列將繼續到巨集最後.如果它依然能用.就返回到前面的巨集"
@@ -501,6 +511,8 @@ L["These lines are executed every time you click this macro.  They are evaluated
 L["These lines are executed every time you click this macro.  They are evaluated by WOW before the line in the Sequence Box."] = "每次單擊此巨集時都會執行這些行. 它們在序列框中的行之前由WOW評估."
 L["These options combine to allow you to reset a macro while it is running.  These options are Cumulative ie they add to each other.  Options Like LeftClick and RightClick won't work together very well."] = "這些選項組合允許你在運行巨集時重置巨集.這些選項是累加的.類似同時選擇左鍵單擊和右鍵單擊,無法很好的協作."
 L["These tick boxes have three settings for each slot.  Gold = Definately use this item. Blank = Do not use this item automatically.  Silver = Either use or not based on my default settings store in GSE's Options."] = "這些複選框對每個插槽都有三個設置. 黃金=絕對使用此項目. 空白=不要自動使用此項目. 銀色 =根據我在GSE選項中的默認設置存儲使用與否."
+--[[Translation missing --]]
+L["This box is disabled as no Inner Loop Limit has been set.  It will never be called without it."] = "This box is disabled as no Inner Loop Limit has been set.  It will never be called without it."
 L["This change will not come into effect until you save this macro."] = "此更改將不會生效,直到你保存此巨集."
 --[[Translation missing --]]
 L["This function will remove the SHIFT+N, ALT+N and CTRL+N keybindings for this character.  Useful if [mod:shift] etc conditions don't work in game."] = "This function will remove the SHIFT+N, ALT+N and CTRL+N keybindings for this character.  Useful if [mod:shift] etc conditions don't work in game."
